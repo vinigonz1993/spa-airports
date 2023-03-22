@@ -1,0 +1,64 @@
+<p>Select an airport to highlight the current fligths</p>
+<div class="tab-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">Airports</th>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let airport of airports">
+            <tr
+                (click)="getAirport(airport)"
+                [class.data-selected]="selectedAirport && selectedAirport.icao === airport.icao"
+            >
+                <td>{{ airport.icao }}</td>
+                <td>{{ airport.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="5">Current Flights</th>
+            </tr>
+            <tr>
+                <th>Flight #</th>
+                <th>From</th>
+                <th>To</th>
+                <th>
+                    Departure
+                    <button
+                        (click)="orderBy('departsAt')"
+                        [class.data-disabled]="order === 'departsAt'"
+                    >
+                        <i class="arrow down"></i>
+                    </button>
+                </th>
+                <th>
+                    Arrival
+                    <button
+                        (click)="orderBy('arrivesAt')"
+                        [class.data-disabled]="order === 'arrivesAt'"
+                    >
+                        <i class="arrow up"></i>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let flight of flights">
+            <tr
+                [class.data-selected]="selectedAirport && (selectedAirport.icao === flight.from || selectedAirport.icao === flight.to)"
+            >
+                <td>{{ flight.flightNumber }}</td>
+                <td>{{ flight.from }}</td>
+                <td>{{ flight.to }}</td>
+                <td>{{ flight.departsAt }}</td>
+                <td>{{ flight.arrivesAt }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
