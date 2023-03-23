@@ -12,6 +12,8 @@ import { Flight } from 'src/app/models/flight.model';
 })
 export class AirportListComponent implements OnInit {
 
+  private _airports!: Airport[];
+  private _flights!: Flight[];
   airports!: Airport[];
   flights!: Flight[];
   order: string = 'departsAt';
@@ -31,6 +33,7 @@ export class AirportListComponent implements OnInit {
         longitude: airport.longitude,
         name: airport.name,
       }));
+      this._airports = this.airports;
     });
 
     this.flightService.get().subscribe((flights) => {
@@ -46,6 +49,7 @@ export class AirportListComponent implements OnInit {
       this.flights.sort((a, b) => {
         return a.departsAt > b.departsAt ? 1 : a.departsAt < b.departsAt ? -1 : 0;
       });
+      this._flights = this.flights;
       this.loader = false;
     });
   }
@@ -61,4 +65,23 @@ export class AirportListComponent implements OnInit {
     })
   }
 
-}
+  refreshData() {
+    this.airports = this._airports;
+    this.flights = this._flights;
+  }
+
+  filterAirports(event: any) {
+    const name: string = event.target.value;
+    if (name !== '') {
+      this.airports = this._airports.filter(
+        (x) => (x.name.toLowerCase()).includes(name.toLowerCase()),
+      );
+      const ids: string[] = this.airports.map((x) => x.icao);
+
+      this.flights = this._flights.filter(
+        (x) => ids.includes(x.from) || ids.includes(x.to),
+      );
+    }
+    else this.refreshData();
+  };
+};

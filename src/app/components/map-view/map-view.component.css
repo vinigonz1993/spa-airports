@@ -13,3 +13,16 @@
 #map {
   height: 100%;
 }
+
+.map-message {
+  z-index: 9999;
+  position: fixed;
+  text-align: center;
+  width: 20%;
+  max-width: 250px;
+  height: 150px;
+  right: 10px;
+  background: #ffffff9a;
+  padding: 1em !important;
+  border-radius: 4px;
+}

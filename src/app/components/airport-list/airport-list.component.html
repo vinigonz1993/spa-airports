@@ -2,6 +2,15 @@
     <div class="loading"></div>
 </div>
 <p>Select an airport to highlight the current fligths</p>
+<div>
+    Filter:
+    <input
+        type="text"
+        placeholder="Filter data by airport name"
+        autocomplete="off"
+        (keyup)="filterAirports($event)"
+    />
+</div>
 <div class="tab-container">
     <table class="table">
         <thead>
@@ -55,6 +64,7 @@
         <tbody *ngFor="let flight of flights">
             <tr
                 [class.data-selected]="selectedAirport && (selectedAirport.icao === flight.from || selectedAirport.icao === flight.to)"
+                disabled="true"
             >
                 <td>{{ flight.flightNumber }}</td>
                 <td>{{ flight.from }}</td>
