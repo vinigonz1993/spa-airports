@@ -16,7 +16,7 @@ export class FlightService {
             this.baseUrl,
             {
                 headers: {
-                    contentType: 'appliucation/json',
+                    contentType: 'application/json',
                     'X-API-Token': '9265ee96af02fe95e132e33a447f8f08',
                 },
             },
