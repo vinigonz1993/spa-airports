@@ -1,9 +1,10 @@
 <nav>
   <a
     class="button"
-    routerLink="/app-home"
+    routerLink="/"
     routerLinkActive="activebutton"
     ariaCurrentWhenActive="page"
+    [routerLinkActiveOptions]="{ exact: true }"
   >
     Home
   </a> |

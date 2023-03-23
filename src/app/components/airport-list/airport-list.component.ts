@@ -16,6 +16,7 @@ export class AirportListComponent implements OnInit {
   flights!: Flight[];
   order: string = 'departsAt';
   selectedAirport!: Airport;
+  loader: boolean = true;
 
   constructor(
     private airportService: AirportService,
@@ -30,7 +31,6 @@ export class AirportListComponent implements OnInit {
         longitude: airport.longitude,
         name: airport.name,
       }));
-
     });
 
     this.flightService.get().subscribe((flights) => {
@@ -45,7 +45,8 @@ export class AirportListComponent implements OnInit {
       }));
       this.flights.sort((a, b) => {
         return a.departsAt > b.departsAt ? 1 : a.departsAt < b.departsAt ? -1 : 0;
-      })
+      });
+      this.loader = false;
     });
   }
 

@@ -8,24 +8,24 @@ table {
 }
 
 th, td {
-    border: 1px solid #cccccc;
+    border: 1px solid #91beec;
     padding: 5px;
 }
 td {
     transition: 0.35s;
 }
 th {
-    background-color: #cccccc;
+    background-color: #91beec;
 }
 
 tbody > tr:hover{
     transition: 0.35s;
-    background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+    background: #91beec ;
     cursor: pointer;
-    color: #666666;
+    color: #052b50;
 }
 .data-selected {
-    background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+    background: #a0ccf8;
     cursor: pointer;
     font-weight: bold !important;
     color: #000;
@@ -47,11 +47,11 @@ button:hover {
 }
 
 .data-disabled {
-    background: #ccc;
+    background: #91beec;
 }
 .data-disabled:hover {
     transition: 0.35s;
-    background: #ccc;
+    background: #91beec;
     border: 0px;
     cursor: default;
 }

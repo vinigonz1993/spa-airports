@@ -17,6 +17,7 @@ export class MapViewComponent implements OnInit {
 
   private airports!: Airport[];
   private flights!: Flight[];
+  loader: boolean = true;
 
   constructor(
     private airportService: AirportService,
@@ -88,7 +89,7 @@ export class MapViewComponent implements OnInit {
     });
 
     this.addTiles();
-
+    this.loader = false;
   }
 
   getData() {

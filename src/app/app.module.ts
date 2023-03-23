@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { AirportListComponent } from './components/airport-list/airport-list.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapViewComponent } from './components/map-view/map-view.component';
 
@@ -20,16 +19,13 @@ import { MapViewComponent } from './components/map-view/map-view.component';
     BrowserModule,
     RouterModule.forRoot([
       {
-        path: 'app-home', component: HomeComponent,
-      },
-      {
         path: 'app-airport-list', component: AirportListComponent,
       },
       {
         path: 'app-map-view', component: MapViewComponent,
       },
       {
-        path: '**', component: NotFoundComponent,
+        path: '**', component: HomeComponent,
       },
     ]),
     HttpClientModule,
