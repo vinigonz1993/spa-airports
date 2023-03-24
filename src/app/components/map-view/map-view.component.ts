@@ -20,6 +20,8 @@ export class MapViewComponent implements OnInit {
   flights!: Flight[];
   airportselected: string = '';
   loader: boolean = true;
+  selectedAirport: Airport | null = null;
+  hoverAirport: Airport | null = null;
 
   constructor(
     private airportService: AirportService,
@@ -65,9 +67,12 @@ export class MapViewComponent implements OnInit {
           this.flights.filter(
             (flight) => flight.from === airport.icao,
           )
+          this.selectAirport(airport);
           this.map.remove();
           this.initMap(airport.icao);
-        });
+        })
+        .on('mouseover', () => this.hoverAirport = airport)
+        .on('mouseout', () => this.hoverAirport = null);
       });
 
     this.flights.forEach((flight) => {
@@ -79,16 +84,20 @@ export class MapViewComponent implements OnInit {
           <strong>Flight #: ${flight.flightNumber}</strong>
           <br/>
           <small>
-            From: ${flight.from}
+            From: ${flight.from} - ${this.airports.find(
+              (x) => x.icao === flight.from,
+            )?.name || ''}
           </small>
           <br/>
           <small>
-            To: ${flight.to}
+            To: ${flight.to} - ${this.airports.find(
+              (x) => x.icao === flight.to,
+            )?.name || ''}
           </small>
           <hr/>
           Departure: ${flight.departsAt}
           <br/>
-          Arrives at: ${flight.departsAt}
+          Arrives at: ${flight.arrivesAt}
         `);
 
       });
@@ -109,6 +118,10 @@ export class MapViewComponent implements OnInit {
 
     this.addTiles(filter);
     this.loader = false;
+  }
+
+  selectAirport(airport: Airport) {
+    this.selectedAirport = airport;
   }
 
   getData() {
@@ -137,6 +150,7 @@ export class MapViewComponent implements OnInit {
   };
 
   resetMap(): void {
+    this.selectedAirport = null;
     this.map.remove();
     this.getData();
   }

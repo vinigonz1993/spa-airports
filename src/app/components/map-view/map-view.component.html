@@ -9,6 +9,14 @@
     Reset map
   </button>
 </div>
+<div *ngIf="selectedAirport || hoverAirport" class="map-airport-detail">
+  <div class="airport-name" *ngIf="hoverAirport">
+    {{ hoverAirport.icao }} - {{ hoverAirport.name }}
+  </div>
+  <div class="airport-name" *ngIf="selectedAirport && !hoverAirport">
+    {{ selectedAirport.icao }} - {{ selectedAirport.name }}
+  </div>
+</div>
 <div class="map-container">
     <div class="map-frame">
       <div id="map"></div>
